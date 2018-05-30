@@ -1,0 +1,23 @@
+let events = require("events");
+
+let eventEmitter = new events.EventEmitter();
+
+let listener_1 = function () {
+    console.log("Listener 1 .....");
+};
+
+let listener_2 = function () {
+    console.log("Listener 2 .....");
+};
+
+eventEmitter.on("connection", listener_1);
+eventEmitter.on("connection", listener_2);
+
+console.log(require('events').EventEmitter.listenerCount(eventEmitter, "connection"));
+
+eventEmitter.emit("connection");
+
+eventEmitter.removeListener("connection", listener_1);
+
+console.log(require('events').EventEmitter.listenerCount(eventEmitter, "connection"));
+eventEmitter.emit("connection");
